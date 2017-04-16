@@ -11,17 +11,15 @@ int main(void)
 	TIM3_PWM_Init();
 	USART1_Config();
   NVIC_Config();
-  	
-	printf("׼������");	
-//	printf("\r\n ���ڳ����ն˻��ߴ��ڵ������������ַ� \r\n");	
-	
-	
-	
+
+	printf("快上车，准备发车啦！！！  -->老司机");
+//	printf("\r\n 请在超级终端或者串口调试助手输入字符 \r\n");
+
+
+
 	for(;;)
 	{
-	
+
 	}
 
-	 
 }
-
