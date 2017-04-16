@@ -1,0 +1,14 @@
+..\output\usart1_config.o: ..\User\USART1_Config.c
+..\output\usart1_config.o: ..\User\USART1_Config.h
+..\output\usart1_config.o: ..\Libraries\CMSIS\stm32f10x.h
+..\output\usart1_config.o: ..\Libraries\CMSIS\core_cm3.h
+..\output\usart1_config.o: D:\JRT\software\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\usart1_config.o: ..\Libraries\CMSIS\system_stm32f10x.h
+..\output\usart1_config.o: ..\User\stm32f10x_conf.h
+..\output\usart1_config.o: ..\Libraries\FWlib\inc\stm32f10x_gpio.h
+..\output\usart1_config.o: ..\Libraries\CMSIS\stm32f10x.h
+..\output\usart1_config.o: ..\Libraries\FWlib\inc\stm32f10x_rcc.h
+..\output\usart1_config.o: ..\Libraries\FWlib\inc\stm32f10x_tim.h
+..\output\usart1_config.o: ..\Libraries\FWlib\inc\stm32f10x_usart.h
+..\output\usart1_config.o: ..\Libraries\FWlib\inc\misc.h
+..\output\usart1_config.o: D:\JRT\software\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
