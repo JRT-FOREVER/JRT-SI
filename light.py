@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-  
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
 # author 施永鑫
 # email shiyongxin@aliyun.com
 # date 2016/11/07
@@ -29,7 +30,7 @@ def cutheader(date):
 
 def cutfooter(date):
     return date[0:len(date)-1]
-    
+
 ##
 ##去掉无用数据
 ##select == 0 return input_date
@@ -69,7 +70,7 @@ def similarity(input_date,lib_date):
 ####        print((input_date[n][1]-lib_date[n][1])*(input_date[n][1]-lib_date[n][1]))
 ##        dvalue.append((input_date[n][1]-lib_date[n][1])^2)
 ####        print(dvalue)
-##        
+##
 ##        ddvalue.append(lib_date[n][1]-dvalue[n])
 ####        print(ddvalue)
 ##
@@ -95,7 +96,7 @@ def contrast(input_date,lib_date):
 ##        print(num)
 ##    print(input_date-lib_date)
 
-    
+
     return 0
 
 
@@ -105,4 +106,3 @@ print(draw(input_date,lib_date,0))
 print(draw(input_date,lib_date,1))
 
 print(similarity(draw(input_date,lib_date,0),draw(input_date,lib_date,1)))
-
