@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-# Author caoxm-me
+# Author caoxm-me <caoxmme@outlook.com>
 # Email
 # Date
 
@@ -16,6 +16,7 @@ import xlrd as xl
 #import sourcedata
 #da = sourcedata.Data()
 
+
 def open_excel(file= 'file.xls'):
     try:
         data = xl.open_workbook(file)
@@ -23,26 +24,28 @@ def open_excel(file= 'file.xls'):
     except Exception.e:
         print(str(e))
 
-def predata(data):
-    temp = []
+
+def data_pre(data):
+    index = []           #存放索引
     for i in (range(len(data)-2)):
-        if not data[i+2] < data[i+1] > data[i]:
+        if not (data[i+1]>data[i] and data[i+1]>data[i+2]):
+            index.append(i+1)
+    return index
 
-            temp.append(i+1)
-            #print(temp)
-            #data[i+1] = 0
-    for i in temp:
-        data[i] = 0
+
+def data_filter(data,index):
+    # 过滤无效数据
+    for i in index:
+        data[i]=0
+    def is_zero(x):
+        return(x!=0)
+    data=(list(filter(is_zero,data)))
     return data
 
-def runa(data):
-    i = 0
-    print(i)
-    while i < 100:
-        data = predata(data)
-        i = i+1
-        print(i)
-    return data
+
+
+
+
 
 
 def draw_chart(num):
@@ -54,13 +57,18 @@ def draw_chart(num):
     table = file.sheets()[0]
 
     # 按列获取工作表数据，第一列是波长
-    wave = table.col_values(0)
-
+    r_wave = table.col_values(0)
     # 按列获取工作表数据，第二列是强度，以后同理，每两列为一组（波长，强度）
-    intensity = table.col_values(num)
+    r_intensity = table.col_values(num)
+    intensity_index=data_pre(r_intensity)
+    intensity=data_filter(r_intensity,intensity_index)
+    #print(type(intensity))
+    print("filter y:",intensity)
+    wave=data_filter(r_wave,intensity_index)
+    print("filter x:", wave)
     #print(intensity)
     # 绘图
-    pl.plot(wave, runa(intensity))
+    pl.plot(wave, intensity)
 
 
 for num_n in [1, 3, 5, 7, 9]:
