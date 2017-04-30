@@ -33,10 +33,25 @@ def data_pre(data):
     return index
 
 
+def filter_times(x, y, times):
+    i = 0
+    while i<times:
+        i=i+1
+        intensity_index = data_pre(y)
+        intensity = data_filter(y, intensity_index)
+        # print(type(intensity))
+        print("filter y:", intensity)
+        wave = data_filter(x, intensity_index)
+        print("filter x:", wave)
+    return(wave, intensity)
+
+
+
 def data_filter(data,index):
     # 过滤无效数据
     for i in index:
         data[i]=0
+
     def is_zero(x):
         return(x!=0)
     data=(list(filter(is_zero,data)))
@@ -55,12 +70,7 @@ def draw_chart(num):
     r_wave = table.col_values(0)
     # 按列获取工作表数据，第二列是强度，以后同理，每两列为一组（波长，强度）
     r_intensity = table.col_values(num)
-    intensity_index=data_pre(r_intensity)
-    intensity=data_filter(r_intensity,intensity_index)
-    #print(type(intensity))
-    print("filter y:",intensity)
-    wave=data_filter(r_wave,intensity_index)
-    print("filter x:", wave)
+    wave, intensity=filter_times(r_wave, r_intensity, 100)
     #print(intensity)
     # 绘图
     pl.plot(wave, intensity)
