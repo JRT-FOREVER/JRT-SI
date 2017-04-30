@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-# author 施永鑫
-# email shiyongxin@aliyun.com
-# date 2016/11/07
+# Author YongXin SHI
+# Email shiyongxin@aliyun.com
+# Date 2016/11/07
+
+# Last_update_time_at 2017/4/30
 
 
 #import numpy as np
@@ -12,6 +14,55 @@ input_date=[(3,90),(4,68),(5,38),(6,18),(7,8),(8,3),(9,5),(10,48)]
 lib_date=[(1,5),(2,48),(3,98),(4,68),(5,38),(6,18),(7,8),(8,2)]
 
 
+################################################
+import xlrd as xl
+def open_excel(file= 'file.xls'):
+    try:
+        data = xl.open_workbook(file)
+        return data
+    except Exception.e:
+        print(str(e))
+
+def data():
+    # 打开表格，file为excel文件对象
+    file = open_excel('c4h10.xlsx')
+
+    # 按序号获取excel工作表，sheets（）返回一个列表，由下表指定工作表
+    table = file.sheets()[0]
+
+    # 按列获取工作表数据，第一列是波长
+    wave = table.col_values(0)
+
+    # 按列获取工作表数据，第二列是强度，以后同理，每两列为一组（波长，强度）
+    intensity = table.col_values(1)
+
+    #print(wave)
+    data = [[],[]]
+    data[0] = wave
+    data[1] = intensity
+
+    return data
+
+#print()
+
+def source(data):
+    print(data)
+    aa = list(list(i) for i in zip(*data))
+    return aa
+
+daa = data()
+
+import sourcedata
+#da = sourcedata.Data()
+a = sourcedata.source(daa)
+#a = source(daa)
+print(a)
+#print(daa)
+#print(len(daa))
+#print(type(daa[0]))
+
+
+#################################
 
 ##二位数组降到一维
 def reduction(inputdate):
