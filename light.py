@@ -10,22 +10,16 @@
 #import numpy as np
 
 ##(x,y)
-input_date=[(3,90),(4,68),(5,38),(6,18),(7,8),(8,3),(9,5),(10,48)]
-lib_date=[(1,5),(2,48),(3,98),(4,68),(5,38),(6,18),(7,8),(8,2)]
+#input_date=[(3,90),(4,68),(5,38),(6,18),(7,8),(8,3),(9,5),(10,48)]
+#lib_date=[(1,5),(2,48),(3,98),(4,68),(5,38),(6,18),(7,8),(8,2)]
 
 
 ################################################
-import xlrd as xl
-def open_excel(file= 'file.xls'):
-    try:
-        data = xl.open_workbook(file)
-        return data
-    except Exception.e:
-        print(str(e))
+import sourcedata
 
-def data():
+def data(num = 1):
     # 打开表格，file为excel文件对象
-    file = open_excel('c4h10.xlsx')
+    file = sourcedata.open_excel('c4h10.xlsx')
 
     # 按序号获取excel工作表，sheets（）返回一个列表，由下表指定工作表
     table = file.sheets()[0]
@@ -34,7 +28,7 @@ def data():
     wave = table.col_values(0)
 
     # 按列获取工作表数据，第二列是强度，以后同理，每两列为一组（波长，强度）
-    intensity = table.col_values(1)
+    intensity = table.col_values(num)
 
     #print(wave)
     data = [[],[]]
@@ -43,24 +37,15 @@ def data():
 
     return data
 
-#print()
+#daa = data()
 
-def source(data):
-    print(data)
-    aa = list(list(i) for i in zip(*data))
-    return aa
+# sourcedata.source  行和列交换
+input_date = sourcedata.source(data())
+lib_date = sourcedata.source(data(3))
 
-daa = data()
+#a = sourcedata.source(daa)
 
-import sourcedata
-#da = sourcedata.Data()
-a = sourcedata.source(daa)
-#a = source(daa)
-print(a)
-#print(daa)
-#print(len(daa))
-#print(type(daa[0]))
-
+#print(input_date)
 
 #################################
 
@@ -153,7 +138,7 @@ def contrast(input_date,lib_date):
 
 ##contrast(input_date,lib_date)
 ##draw(input_date,lib_date,1)
-print(draw(input_date,lib_date,0))
-print(draw(input_date,lib_date,1))
+#print(draw(input_date,lib_date,0))
+#print(draw(input_date,lib_date,1))
 
 print(similarity(draw(input_date,lib_date,0),draw(input_date,lib_date,1)))
