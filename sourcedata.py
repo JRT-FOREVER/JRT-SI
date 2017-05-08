@@ -14,6 +14,6 @@ def open_excel(file= 'file.xls'):
     except Exception.e:
         print(str(e))
 
-
+# 行和列交换
 def source(data):
     return list(list(i) for i in zip(*data))

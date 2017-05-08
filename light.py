@@ -7,7 +7,7 @@
 # Last_update_time_at 2017/4/30
 
 
-#import numpy as np
+import numpy as np
 
 ##(x,y)
 #input_date=[(3,90),(4,68),(5,38),(6,18),(7,8),(8,3),(9,5),(10,48)]
@@ -37,15 +37,40 @@ def data(num = 1):
 
     return data
 
-#daa = data()
+daa = data()
 
 # sourcedata.source  行和列交换
 input_date = sourcedata.source(data())
 lib_date = sourcedata.source(data(3))
 
-#a = sourcedata.source(daa)
+# 滤波
+def wave_filtering(daa):
+    m = (max(daa[1])-min(daa[1]))*0.6+min(daa[1])
+    med = (max(daa[1])-min(daa[1]))*0.5+min(daa[1])
 
+    data = sourcedata.source(daa)
+
+    for num in range(len(data)):
+        if data[num][1] < m:
+            data[num][1] = 3000
+
+    data = sourcedata.source(data)
+    return data
+
+input_date = wave_filtering(data())
+lib_date = wave_filtering(data(3))
 #print(input_date)
+
+import pylab as pl
+pl.plot(input_date[0], input_date[1])
+pl.plot(lib_date[0], lib_date[1])
+
+# 显示图像
+pl.show()
+pl.close()
+
+input_date = sourcedata.source(input_date)
+lib_date = sourcedata.source(lib_date)
 
 #################################
 
