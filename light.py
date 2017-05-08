@@ -4,7 +4,7 @@
 # Email shiyongxin@aliyun.com
 # Date 2016/11/07
 
-# Last_update_time_at 2017/4/30
+# Last_update_time_at 2017/5/8
 
 
 import numpy as np
@@ -17,49 +17,28 @@ import numpy as np
 ################################################
 import sourcedata
 
-def data(num = 1):
-    # 打开表格，file为excel文件对象
-    file = sourcedata.open_excel('c4h10.xlsx')
+print("请输入图像编号，目前有 1，3，5，7，9：")
+lib_num = int(input())
+print(type(lib_num))
 
-    # 按序号获取excel工作表，sheets（）返回一个列表，由下表指定工作表
-    table = file.sheets()[0]
-
-    # 按列获取工作表数据，第一列是波长
-    wave = table.col_values(0)
-
-    # 按列获取工作表数据，第二列是强度，以后同理，每两列为一组（波长，强度）
-    intensity = table.col_values(num)
-
-    #print(wave)
-    data = [[],[]]
-    data[0] = wave
-    data[1] = intensity
-
-    return data
-
-daa = data()
-
+#daa = data()
+'''
 # sourcedata.source  行和列交换
 input_date = sourcedata.source(data())
 lib_date = sourcedata.source(data(3))
+print(input_date)
+'''
 
-# 滤波
-def wave_filtering(daa):
-    m = (max(daa[1])-min(daa[1]))*0.6+min(daa[1])
-    med = (max(daa[1])-min(daa[1]))*0.5+min(daa[1])
+import chart
 
-    data = sourcedata.source(daa)
+print(sourcedata.data(lib_num))
 
-    for num in range(len(data)):
-        if data[num][1] < m:
-            data[num][1] = 3000
+input_date = sourcedata.wave_filtering(sourcedata.data(lib_num))
+lib_date = sourcedata.wave_filtering(sourcedata.data())
 
-    data = sourcedata.source(data)
-    return data
-
-input_date = wave_filtering(data())
-lib_date = wave_filtering(data(3))
 #print(input_date)
+
+# 滤波后的图像
 
 import pylab as pl
 pl.plot(input_date[0], input_date[1])
@@ -165,5 +144,10 @@ def contrast(input_date,lib_date):
 ##draw(input_date,lib_date,1)
 #print(draw(input_date,lib_date,0))
 #print(draw(input_date,lib_date,1))
-
-print(similarity(draw(input_date,lib_date,0),draw(input_date,lib_date,1)))
+value = similarity(draw(input_date,lib_date,0),draw(input_date,lib_date,1))
+print(value)
+if value < 50000:
+    print("C4H10")
+else :
+    print("Unknown material")
+#print(similarity(draw(input_date,lib_date,0),draw(input_date,lib_date,1)))
